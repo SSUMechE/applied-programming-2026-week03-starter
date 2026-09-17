@@ -4,10 +4,17 @@
 
 If installation stops with `DLL load failed`, `_socket`,
 `_multiarray_umath`, or "An Application Control policy has blocked this file",
-stop the failed installation and follow [Windows recovery](#windows-recovery).
+stop the failed installation and follow [Conda environment repair](#conda-environment-repair).
 Do not disable Windows security, delete your course environment, recreate your
 GitHub repository, or replace your completed TODO files. A working environment
 does not need to be changed. The assignment and submission requirements are unchanged.
+
+The corrected `environment.yml` now follows Week 1: Conda installs Python and
+pip, then pip installs the pinned course packages. The previous Week 3 YAML
+instead selected conda-forge builds of NumPy and the test tools. Matching version
+numbers do not imply matching binary files. The old fresh Conda setup failed
+loading NumPy on the instructor's PC. The corrected fresh setup passed the
+environment check, starter baseline and completed assignment checks on that PC.
 
 This repository turns Week 2 numerical path data into tested planning-domain
 objects. It is **Assignment 3, Part A**, submitted for Week 3 through the same
@@ -142,6 +149,54 @@ bodies or establish Assignment completion. A successful check ends with:
 ```text
 [PASS] Week 3 object-programming environment is ready.
 ```
+
+## Conda environment repair
+
+If your existing Week 1/2 environment passes `python scripts/verify_environment.py`,
+keep using it. You do not need a new Python installation or a new environment.
+
+For a failing environment, use the following steps in **Anaconda Prompt** inside
+your existing Week 3 repository. They leave the old environment and all TODO
+files intact. Students with an older private template do not need to edit the
+protected `environment.yml`, import the template again or send another invitation.
+
+1. Enable UTF-8 for this command window and create a separate course environment.
+
+   ```bat
+   set PYTHONUTF8=1
+   conda create -n applied-programming-w03 --override-channels -c conda-forge python=3.12.13 pip=26.2.1
+   ```
+
+   Confirm Conda's installation prompt with `y`. If that name already exists,
+   do not overwrite it. Activate it and attempt the checks below instead.
+   UTF-8 mode fixes a possible `cp949` decoding error, not a security-policy block.
+
+2. Activate it, check Python's networking libraries, then install the course packages.
+
+   ```bat
+   conda activate applied-programming-w03
+   python -c "import socket, ssl; print('IMPORTS_OK')"
+   python -m pip install -r requirements.txt
+   python -m pip install -e . --no-build-isolation
+   python scripts/verify_environment.py
+   ```
+
+   Stop at the first error. The import check must print `IMPORTS_OK` and the
+   verifier must finish with `[PASS] Week 3 object-programming environment is ready.`
+   Do not install NumPy separately with `conda install` in this repaired environment.
+   The pinned requirements install it using the same pip route as Week 1.
+
+3. For an untouched starter, run `python scripts/run_baseline.py` and expect
+   `68 failed, 8 passed`. If you already changed TODOs, use
+   `python -m pytest -q` instead. Do not undo your work to reproduce the baseline.
+
+4. In later Anaconda Prompt windows, return to this repository and use
+   `conda activate applied-programming-w03` before the normal Week 3 commands.
+   Tests, outputs, wheel building and LMS submission are otherwise unchanged.
+
+If Windows still explicitly blocks Python or a DLL, do not disable security.
+Report the complete error and use the verified alternative below if your PC
+permits it. A managed-PC administrator must review remaining policy blocks.
 
 ## Windows recovery
 
