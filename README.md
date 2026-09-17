@@ -1,5 +1,14 @@
 # Week 3 — Object-Oriented Programming
 
+## Windows installation correction — 17 September 2026
+
+If installation stops with `DLL load failed`, `_socket`,
+`_multiarray_umath`, or "An Application Control policy has blocked this file",
+stop the failed installation and follow [Windows recovery](#windows-recovery).
+Do not disable Windows security, delete your course environment, recreate your
+GitHub repository, or replace your completed TODO files. A working environment
+does not need to be changed. The assignment and submission requirements are unchanged.
+
 This repository turns Week 2 numerical path data into tested planning-domain
 objects. It is **Assignment 3, Part A**, submitted for Week 3 through the same
 GitHub and LMS workflow used in Weeks 1 and 2. Week 4 continues with collections
@@ -133,6 +142,84 @@ bodies or establish Assignment completion. A successful check ends with:
 ```text
 [PASS] Week 3 object-programming environment is ready.
 ```
+
+## Windows recovery
+
+Use this section only when the normal installation fails. The same repository
+and source files are used. Anaconda Prompt is the command window. For this
+recovery, Python runs from a separate `.venv` instead of the failing Conda
+environment. `PYTHONUTF8` addresses a separate `cp949` decoding error. It does
+not fix an application-control block.
+
+1. Close the failed command window. Open a new **Anaconda Prompt** and change
+   to your existing Week 3 repository folder. Do not clone again.
+
+   ```bat
+   set PYTHONUTF8=1
+   cd /d "C:\your-course-folder\applied-programming-w03-YOUR-STUDENT-ID"
+   py -3.12 --version
+   ```
+
+   Replace the path with your actual folder. Continue only if the last command
+   reports Python 3.12.x. If `py` is missing or cannot find Python 3.12, install
+   an official Python 3.12 Windows distribution from
+   <https://www.python.org/downloads/windows/> with the Python launcher, then
+   reopen Anaconda Prompt and repeat this check. Do not install an unrelated
+   Python version or download DLLs from third-party sites. On a managed PC,
+   ask its administrator to install an approved Python 3.12 distribution.
+
+2. Create `.venv` only if this repository does not already have one.
+
+   ```bat
+   py -3.12 -m venv .venv
+   ```
+
+   If `.venv` already exists, skip creation. Activate it and check its Python
+   version below. If that version is not 3.12.x or activation fails, stop and
+   send the error to the instructor instead of deleting or replacing files.
+
+3. Activate the environment and check its interpreter and standard libraries.
+
+   ```bat
+   .venv\Scripts\activate
+   python --version
+   python -c "import sys; print(sys.executable)"
+   python -c "import socket, ssl; print('IMPORTS_OK')"
+   ```
+
+   The executable path must end in this repository's
+   `.venv\Scripts\python.exe`. The import check must print `IMPORTS_OK`.
+   If Windows also blocks this interpreter or a DLL, stop. Send the command
+   and complete error text to the instructor or the managed-PC administrator.
+   Do not turn off Smart App Control, antivirus, or application-control policy.
+
+4. Install the unchanged requirements and Week 3 package.
+
+   ```bat
+   python -m pip install -r requirements.txt
+   python -m pip install -e . --no-build-isolation
+   python -c "import numpy; print(numpy.__version__)"
+   python scripts/verify_environment.py
+   ```
+
+   NumPy must report `2.5.1`. The verifier must finish with
+   `[PASS] Week 3 object-programming environment is ready.`
+   Stop at the first error rather than running the later commands.
+
+5. For an untouched starter, run `python scripts/run_baseline.py`. Its expected
+   summary is `68 failed, 8 passed`. If you have already changed TODOs, run
+   `python -m pytest -q` instead. Do not undo your work to reproduce the baseline.
+
+6. When you reopen Anaconda Prompt, return to this repository and run
+   `.venv\Scripts\activate` before the normal Week 3 commands. Use this same
+   environment for editing, testing, output generation and wheel building.
+   The existing `.gitignore` excludes `.venv`. Do not upload environment files.
+
+This recovery does not repair Windows policy or guarantee that every managed PC
+will allow the packages. Report any remaining block for administrator review.
+Keep passwords, tokens and authentication codes out of diagnostic screenshots.
+Students who already created a private repository can follow these commands
+directly. No template re-import, source replacement or new invitation is needed.
 
 ## Record the starter baseline and begin the note
 
