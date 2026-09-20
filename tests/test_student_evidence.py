@@ -1,6 +1,12 @@
-"""Write at least eight independent tests for Assignment 3, Part A."""
+"""Write at least four independent tests for the Week 3 Assignment.
 
-# Replace this placeholder with your own top-level test_... functions.
+Cover normal use, rejected invalid input, ownership of stored data,
+and separate PlanningRun histories. Use your own inputs and assertions.
+"""
+
+# Replace the placeholder with at least four distinct top-level test_ functions.
+# Parametrized cases from one function still count as one test function.
+# Call the public objects and assert their behavior. Do not copy published tests.
 
 
 def test_student_placeholder() -> None:

@@ -1,4 +1,4 @@
-"""The single mutable state owner completed in Assignment 3, Part A."""
+"""The single mutable state owner completed in the Week 3 Assignment."""
 
 from __future__ import annotations
 

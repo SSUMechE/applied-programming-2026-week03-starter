@@ -1,64 +1,73 @@
 # Week 3 — Object-Oriented Programming
 
-Complete objects that store coordinates and paths, reject invalid combinations,
-and keep each planning run's results separate. The path is supplied. You do not
-implement a planner, collision checker, controller or simulator.
+Build objects that store coordinates and paths, reject invalid combinations,
+and keep each planning run's results separate. Complete TODO 1–8, write at least
+four independent tests, run the demo, and submit your code through GitHub and LMS.
+You do not implement a planner, collision checker, controller or simulator.
 
-**Assignment guidance updated — 21 September 2026.** The implementation,
-TODO numbers, tests and submission requirements have not changed. If you have
-already started, keep your existing private repository and completed work.
-Use the revised Reading with the same TODOs. Do not clone again, overwrite your
-source files or send another invitation just to use the new instructions.
+Read [Week 3 Reading, Section 7](docs/week_03_object_oriented_programming_reading_v11.pdf)
+for the Assignment and [PROTECTED_FILES.md](PROTECTED_FILES.md) for the edit
+boundary. This README provides the commands in working order. Chapter practice
+uses a separate folder. Do not paste chapter examples over the Assignment files.
 
-## Read first
+<details>
+<summary>Already started? Keep your repository and completed TODOs</summary>
 
-1. [Week 3 Reading](docs/week_03_object_oriented_programming_reading_v10.pdf),
-   including Section 7, **Assignment 3, Part A**.
-2. This README for the execution order and commands.
-3. [PROTECTED_FILES.md](PROTECTED_FILES.md) for the edit boundary.
+The 21 September simplification keeps the public API, TODO 1–8 and all 76
+published tests. Your code still applies. Do not clone again or replace your
+three editable files. No new invitation is needed for the same repository.
 
-The Reading is the complete specification. Its chapter practice uses a separate
-folder outside this repository. Do not paste those practice files over the
-Assignment starter. Week 4 continuation does not postpone the Week 3 submission.
+Download the existing-student update ZIP from the
+[Week 3 V10 release](https://github.com/SSUMechE/applied-programming-2026-week03-starter/releases/tag/week03-v10-simplified-assignment)
+and extract it outside your repository. From Anaconda Prompt in your existing
+repository, run the extracted updater. Replace the example path:
 
-## 1. Open your private Week 3 repository
+```bat
+python "C:\Downloads\week03-update\apply_week03_update.py" --repo .
+```
 
-If you do not have one yet, use
-[the Week 3 template](https://github.com/SSUMechE/applied-programming-2026-week03-starter):
+The updater checks the supplied files before updating them and preserves your
+three editable files and existing personal work. Read its result. If a protected
+file differs, stop and ask for help instead of forcing an overwrite. Use the new
+Reading and checker after a successful update. Review `git diff`, then run the
+updater's printed `git add -- ...` command to stage the official updates before
+the normal code/test commit. The updater does not stage, commit or push for you.
 
-1. Select **Use this template → Create a new repository** under your own account.
+</details>
+
+## 1. Open the repository and prepare the environment
+
+Create a private repository from
+[the Week 3 template](https://github.com/SSUMechE/applied-programming-2026-week03-starter)
+only if you do not already have one:
+
+1. Select **Use this template → Create a new repository** under your account.
 2. Name it `applied-programming-w03-<student-id>` and select **Private**.
-3. In **Settings → Collaborators → Add people**, invite `SSUMechE`.
+3. Use **Settings → Collaborators → Add people** to invite **SSUMechE**.
 
-Invitation sent/pending and accepted/active are different states. You can work
-while acceptance is pending. A correct invitation sent on time and awaiting
-only instructor acceptance is not a student omission.
+Invitation pending and accepted/active are different states. A correct invitation
+sent on time and awaiting only instructor acceptance is not a student omission.
 
-Use **Anaconda Prompt** on Windows, not the Python `>>>` prompt. Replace the
-example folder, GitHub ID and student ID below with your own values. If already
-cloned, enter the existing folder instead of running `git clone` again.
+On Windows use **Anaconda Prompt**, not the Python `>>>` prompt. Replace the
+folder, GitHub ID and student ID below. If already cloned, enter that folder
+instead of cloning again.
 
 ```bat
 cd /d "C:\your-course-folder"
 git clone https://github.com/YOUR-GITHUB-ID/applied-programming-w03-YOUR-STUDENT-ID.git
 cd applied-programming-w03-YOUR-STUDENT-ID
-git status
 git remote -v
 ```
 
-Both `origin` addresses must point to your private Week 3 repository. For a first
+Both `origin` addresses must point to your private Week 3 repository. On first
 HTTPS clone, Git Credential Manager may open browser sign-in. Use the repository
-owner's account and complete your own two-factor authentication. If Git asks
-for a password, a GitHub account password is not valid for Git HTTPS. Follow the
-course's Credential Manager or personal access token instructions. Never put a
-token in a URL, file, note, screenshot or LMS entry. For `Repository not found`,
-check the URL and signed-in account before changing Python code.
+owner's account and complete your own two-factor authentication. A GitHub account
+password is not a Git HTTPS password. Follow the course Credential Manager or
+personal access token guidance. Never put a token in a URL, file or LMS entry.
+For `Repository not found`, check the URL and signed-in account first.
 
-## 2. Install and check the environment
-
-Run all remaining commands from the **repository root**. Reuse your working
-Week 1 environment. If activation says it does not exist, first run
-`conda env create -f environment.yml`, then run the block below.
+Run subsequent commands from the **repository root**. Reuse your working Week 1
+environment. If it does not exist, first run `conda env create -f environment.yml`.
 
 ```bat
 conda activate applied-programming-2026
@@ -67,39 +76,27 @@ python -m pip install -e . --no-build-isolation
 python scripts/verify_environment.py
 ```
 
-The first installation command installs the listed dependencies. The second
-links this Week 3 package to your source, so a new run uses saved TODO edits.
-The verifier should finish with:
-
-```text
-[PASS] Week 3 object-programming environment is ready.
-```
-
-This checks the environment, not your unfinished implementation. Stop on an
-installation error. The corrected YAML uses Conda for Python/pip and pip for
-course packages, as in Week 1. Do not change a working environment.
+The first install adds dependencies. The second links this package to saved
+source edits. Expect `[PASS] Week 3 object-programming environment is ready.`
+This checks setup, not the unfinished TODOs. Stop at the first installation error.
 
 <details>
-<summary>Installation fails: corrected Conda repair and Python 3.12 alternative</summary>
+<summary>Installation fails: corrected Conda route and Python 3.12 alternative</summary>
 
 For `DLL load failed`, `_socket`, `_multiarray_umath` or an application-control
-error, do not disable Windows security, delete the course environment or replace
-your TODO files. The corrected setup passed on the instructor's PC. It is not a
-guarantee that every managed PC permits these binaries.
+error, do not disable Windows security, delete your environment or replace TODO
+files. This corrected route passed on the instructor's PC, but individual
+managed-PC restrictions can still require administrator help.
 
-### Conda environment repair
-
-In Anaconda Prompt, inside your existing Week 3 repository, create a separate
-environment. Students with an older template do not need to edit the protected
-YAML or re-import the template.
+In Anaconda Prompt at the repository root, create a separate environment:
 
 ```bat
 set PYTHONUTF8=1
 conda create -n applied-programming-w03 --override-channels -c conda-forge python=3.12.13 pip=26.2.1
 ```
 
-Confirm installation with `y`. If that name exists, skip creation and activate
-it. `PYTHONUTF8` addresses a possible `cp949` decoding error, not a security block.
+Confirm with `y`. If the name already exists, skip creation. `PYTHONUTF8` addresses
+a possible `cp949` decoding error, not a security block.
 
 ```bat
 conda activate applied-programming-w03
@@ -109,34 +106,22 @@ python -m pip install -e . --no-build-isolation
 python scripts/verify_environment.py
 ```
 
-Stop at the first error. Expect `IMPORTS_OK` and the verifier's PASS line.
-Do not install NumPy separately with `conda install` in this environment.
-In later windows, return to this repository and activate
-`applied-programming-w03` before the normal commands.
+Expect `IMPORTS_OK` and the verifier PASS. Do not install NumPy separately with
+`conda install` here. In later windows, activate `applied-programming-w03`.
 
-### Python 3.12 alternative
+If Anaconda is unavailable or still fails, use an official Python 3.12
+installation with the Windows Python launcher. Check `py -3.12 --version`.
+If missing, use the official
+[Python Windows downloads](https://www.python.org/downloads/windows/) or ask the
+administrator. Do not download individual DLLs from third-party sites.
 
-If Anaconda is unavailable or the repaired environment still fails, open a new
-Anaconda Prompt or Windows Command Prompt and enter the existing repository.
-
-```bat
-set PYTHONUTF8=1
-cd /d "C:\your-course-folder\applied-programming-w03-YOUR-STUDENT-ID"
-py -3.12 --version
-```
-
-Continue only with Python 3.12.x. If missing, install an official
-[Python 3.12 Windows distribution](https://www.python.org/downloads/windows/)
-with the Python launcher, or ask the managed-PC administrator. Do not download
-individual DLLs from third-party sites.
-
-Create `.venv` only if it does not already exist:
+From the existing repository, create `.venv` only if it does not exist:
 
 ```bat
 py -3.12 -m venv .venv
 ```
 
-Activate and check it:
+Then activate it and check:
 
 ```bat
 .venv\Scripts\activate
@@ -145,170 +130,114 @@ python -c "import sys; print(sys.executable)"
 python -c "import socket, ssl; print('IMPORTS_OK')"
 python -m pip install -r requirements.txt
 python -m pip install -e . --no-build-isolation
-python -c "import numpy; print(numpy.__version__)"
 python scripts/verify_environment.py
 ```
 
-Expect Python 3.12.x, this repository's `.venv\Scripts\python.exe`,
-`IMPORTS_OK`, NumPy `2.5.1` and the verifier's PASS line. Stop at the first
-error. Do not delete or replace an existing `.venv` that fails these checks.
-Report the command and complete error without credentials. Remaining Windows
-policy blocks need administrator review, not disabled security.
-
-In later windows, return to this repository and run `.venv\Scripts\activate`.
-The existing `.gitignore` excludes `.venv`. Do not upload environment files.
-
-After either recovery, use `python scripts/run_baseline.py` only for an untouched
-starter. If TODOs are already edited, use `python -m pytest -q` instead. Do not
-undo completed work to recreate the original baseline.
+Expect Python 3.12.x, this repository's `.venv\Scripts\python.exe`, `IMPORTS_OK`
+and the verifier PASS. Stop at the first error and report it without credentials.
+Do not delete an existing failing `.venv`. In later windows, return here and run
+`.venv\Scripts\activate`. Do not upload the environment folder.
 
 </details>
 
-## 3. Record the baseline, then implement TODO 1–8
+## 2. Complete TODO 1–8
 
-Before editing an untouched starter:
+An untouched starter gives `68 failed, 8 passed` with
+`python scripts/run_baseline.py`. These are expected unfinished-TODO failures.
+If you already edited TODOs, keep your work and run the relevant check below.
 
-```bat
-python scripts/run_baseline.py
-```
+Open the two source files, find each TODO, replace its `raise NotImplementedError`
+body, and save. Keep provided fields, names, signatures, decorators and TODO
+numbers. Reading Section 7 gives the required behavior. Do not reimplement
+`geometry.py` or the provided `PlanningRun._results` field.
 
-Expect `68 failed, 8 passed`, followed by the wrapper's baseline PASS line.
-Record the summary and first FAILED node ID in section 0 of the existing
-`artifacts/engineering_note.md`, then save. If you have already begun, keep your
-work and original record. Do not restore the starter just to repeat this step.
-
-Open the two source files in your editor. Search for the TODO number, replace
-the corresponding `raise NotImplementedError(...)` with your implementation,
-and save. Keep class names, fields, signatures, decorators and TODO numbers.
-Do not remove every stub at once. The Reading Section 7.4 gives the exact
-behavior and expected values for each TODO before its grouped check.
-
-| TODO | File and exact bodies to complete |
+| File | TODOs and bodies to complete |
 |---|---|
-| 1 | `domain.py`: `_normalized_values`, `Configuration.__post_init__` |
-| 2 | `domain.py`: `Configuration.dimension`, `Configuration.as_array` |
-| 3 | `domain.py`: `ConfigurationBounds.__post_init__`, `.dimension` |
-| 4 | `domain.py`: `ConfigurationBounds.contains` |
-| 5 | `domain.py`: `Path.__post_init__`, `.dimension`, `.start`, `.goal`, `.as_array`, `.length` |
-| 6 | `domain.py`: `PlanningProblem.__post_init__` |
-| 7 | `domain.py`: `PlanResult.__post_init__`, `.succeeded` |
-| 8 | `history.py`: `PlanningRun.__post_init__`, `.record_result`, `.results`, `.latest` |
+| `src/ap_week03_planning/domain.py` | 1: `_normalized_values`, `Configuration.__post_init__`. 2: `Configuration.dimension`, `.as_array`. |
+| Same file | 3: `ConfigurationBounds.__post_init__`, `.dimension`. 4: `.contains`. |
+| Same file | 5: `Path.__post_init__`, `.dimension`, `.start`, `.goal`, `.as_array`, `.length`. |
+| Same file | 6: `PlanningProblem.__post_init__`. 7: `PlanResult.__post_init__`, `.succeeded`. |
+| `src/ap_week03_planning/history.py` | 8: `PlanningRun.__post_init__`, `.record_result`, `.results`, `.latest`. |
 
-Both files are under `src/ap_week03_planning/`. The numerical function in
-`geometry.py` and the `PlanningRun._results` field are already provided.
-Do not reimplement them. Invalid public construction/update raises
-`PlanningModelError`, not a silently repaired object.
-
-After each completed group, run its check:
+Run each command **after completing the named group**:
 
 ```bat
 python -m pytest -q tests/test_published_contract.py -k test_configuration_ -x
+```
+
+After TODO 1–2: `21 passed, 55 deselected`.
+
+```bat
 python -m pytest -q tests/test_published_contract.py -k test_bounds_ -x
+```
+
+After TODO 3–4: `11 passed, 65 deselected`.
+
+```bat
 python -m pytest -q tests/test_published_contract.py -k "test_path_ or test_problem_" -x
+```
+
+After TODO 5–6: `17 passed, 59 deselected`. Some path tests also need the problem.
+
+```bat
 python -m pytest -q tests/test_published_contract.py -k "result or run" -x
 ```
 
-| Run after | Expected result |
-|---|---|
-| TODO 1–2: configuration check | `21 passed, 55 deselected` |
-| TODO 3–4: bounds check | `11 passed, 65 deselected` |
-| TODO 5–6: path/problem check | `17 passed, 59 deselected` |
-| TODO 7–8: result/run check | `16 passed, 60 deselected` |
+After TODO 7–8: `16 passed, 60 deselected`.
 
-`-k` selects test names, `-x` stops at the first failure and `-q` reduces detail.
-`deselected` tests did not run. Some path tests construct a `PlanningProblem`,
-so run the full path/problem group after TODO 6. These separate counts are not
-the full-suite total. When all TODOs are complete, run:
+`-k` selects names, `-x` stops at the first failure, and `-q` reduces detail.
+`deselected` tests did not run. After all TODOs, run the full published suite:
 
 ```bat
 python -m pytest -q tests/test_published_contract.py
 ```
 
-Expected: `76 passed`.
+Expected: **76 passed**. This full suite includes cases outside the grouped checks.
 
-## 4. Add your tests and generate the results
+## 3. Write tests and check the completed program
 
-Replace the placeholder in `tests/test_student_evidence.py` with at least eight
-distinct top-level `test_...` functions using independent inputs. Follow the
-eight categories in Reading Section 7.5. Run:
+Replace the placeholder in `tests/test_student_evidence.py` with **at least four
+distinct top-level `test_...` functions**. Cover these four behaviors with your
+own inputs and assertions:
+
+- Normal construction or use gives the expected result.
+- Invalid construction or an invalid update raises `PlanningModelError`.
+- Changing a caller-owned input or returned array does not change stored values.
+- Two `PlanningRun` instances keep separate result histories.
+
+Parametrized variants of one function still count as one function. Do not copy
+published test bodies, leave placeholder-only tests or count skipped tests.
 
 ```bat
 python -m pytest -q
-```
-
-Expect at least `84 passed`. Skipped tests do not count. Counts alone do not
-establish that your cases and assertions cover the required categories.
-
-Then run the supplied demo and output generator without editing them:
-
-```bat
 python -m ap_week03_planning.demo
-python scripts/generate_outputs.py
-```
-
-They use the fixed four-waypoint example from the Reading, not keyboard input
-or a JSON input file. The demo prints dimension `2`, waypoint count `4`, length
-`4.356407`, result count `1` and `succeeded: True` for `demo-tool-path`.
-The generator prints two `[PASS] wrote ...` lines and saves:
-
-- `artifacts/planning_objects_report.json`: open in an editor and check the
-  values against the demo. The saved length is approximately `4.35640661761539`.
-- `artifacts/planning_objects_preview.svg`: open in a browser and check the four
-  labels `start`, `q1`, `q2`, `goal` in order.
-
-The SVG displays the stored path, not a planner, collision check or physical
-execution. Regeneration replaces these two files using current source.
-Do not hand-edit them or type the expected output yourself. If a TODO raises
-`NotImplementedError`, complete that body instead of changing the demo.
-
-## 5. Finish the note and build the package
-
-Open `artifacts/engineering_note.md` in your editor. Write answers in all seven
-sections, 0–6, using your actual results. Save, then verify the saved contents:
-
-```bat
-type artifacts\engineering_note.md
-```
-
-Fill the wheel filename in section 5 after the next build, then leave no
-`REPLACE_ME` or empty answer. Do not overwrite completed answers with a fresh
-template. The Reading explains each section's required content.
-
-A wheel is the installable `.whl` package built from your completed source.
-The editable installation is for development. The wheel checks the packaged
-form without relying on that source link. You do not write a packaging script.
-Inspect `dist` before rebuilding and remove only an obsolete Week 3 wheel if
-necessary so the final folder contains exactly one wheel.
-
-```bat
-python -m build --wheel --no-isolation
-dir /b dist\*.whl
-```
-
-With unchanged metadata, the filename is
-`ap_week03_planning-0.1.0-py3-none-any.whl`. Record it in note section 5,
-save the note, then run:
-
-```bat
 python scripts/check_submission.py
 ```
 
-`--no-isolation` uses the installed build tools. The checker compares generated outputs and imports this wheel in
-a separate isolated Python interpreter using existing dependencies. It does
-not create a new virtual environment or install the wheel with pip.
+Expect **at least 80 passed**, then the demo's six lines:
 
-The checker does not establish explanation quality, GitHub access or LMS
-submission. Your only manually edited files are the two TODO files, the student
-test file and the note. Commit the generated JSON, SVG and wheel too.
+```text
+problem_id: demo-tool-path
+configuration dimension: 2
+waypoints: 4
+path length: 4.356407
+result count: 1
+succeeded: True
+```
 
-## 6. Review, commit and push
+The demo uses supplied coordinates, not keyboard input. The local checker must
+finish with `[PASS] Week 3 code and test checkpoint: ...`. It runs the tests and
+checks their basic structure. The instructor reviews category coverage,
+meaningful assertions and independence. A pass is not GitHub or LMS submission.
+
+## 4. Review and push your code
 
 ```bat
 git status --short
 git diff
 git add src/ap_week03_planning/domain.py
 git add src/ap_week03_planning/history.py
-git add tests/test_student_evidence.py artifacts dist
+git add tests/test_student_evidence.py
 git diff --staged
 git commit -m "Complete Week 3 planning domain objects"
 git push origin main
@@ -317,23 +246,14 @@ git ls-remote origin refs/heads/main
 git status --short
 ```
 
-Review the unstaged and staged changes before committing. If a pager opens,
-press `q`. `add` selects changes, `commit` records them locally and `push`
-uploads them. Compare the two full commit IDs and confirm the working tree is
-clean. On GitHub, check the note and generated files at that revision.
-Record the full ID for LMS, not inside a note that would require another commit.
+Review changes before committing. Press `q` to leave a Git pager. `add` selects
+files, `commit` saves a local revision, and `push` uploads it. The two full commit
+IDs must match. Confirm the submitted code and tests are visible at that revision.
 
-## 7. Submit through LMS
+## 5. Submit through LMS
 
-Submit within **one week of the Week 3 lab**. Follow the exact LMS date/time.
-Use the same three fields as Weeks 1 and 2:
-
-1. Your private `applied-programming-w03-<student-id>` repository URL.
-2. Its full 40-character commit ID, matching the pushed revision.
-3. Confirmation of private visibility, actual `SSUMechE` access state and the
-   revision to be graded.
-
-Fictional example — replace every example value with your own:
+Submit within **one week of the Week 3 lab**. The exact date/time is in LMS.
+Use the same three fields as Weeks 1 and 2. Fictional example:
 
 ```text
 Repository URL:
@@ -347,17 +267,13 @@ The repository is private. SSUMechE has active collaborator access.
 The commit above is the revision to be graded.
 ```
 
-- If a correct on-time invitation awaits only instructor acceptance, report
-  that it is pending instead. This is not a student omission. Follow the LMS
-  contact guidance if it remains pending after the announced checking time.
-- Follow the designated name, file structure and LMS format. Missing mandatory
-  submission requirements by the deadline results in zero for the assignment,
-  with the pending-invitation exception above.
-- GitHub upload without LMS submission is not a submission. No extra LMS file
-  attachment is required. Keep code, tests, note, JSON/SVG and wheel in GitHub.
-- Do not submit the public template URL, a local path, branch name, `latest`,
-  short hash, unpushed commit or any credential. Later pushes do not replace
-  the submitted revision. Retain private visibility and access through grading.
-
-The submission-format rule does not make every failed numerical test an
-automatic zero for the entire assignment.
+- Replace every example value. Report a correct on-time invitation as pending
+  if only instructor acceptance remains. That pending state is not an omission.
+- Follow the designated repository name, file structure and LMS format. Missing
+  mandatory submission requirements by the deadline results in zero, with the
+  pending-invitation exception above. This is not automatic zero for every test
+  failure.
+- GitHub upload alone is not submission. No LMS file attachment is required.
+- Do not submit the public template URL, local path, branch name, `latest`,
+  short hash, unpushed commit or credentials. Later pushes do not replace the
+  submitted revision. Retain private visibility and instructor access for grading.

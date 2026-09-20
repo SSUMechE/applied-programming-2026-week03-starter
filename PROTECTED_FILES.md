@@ -1,44 +1,21 @@
-# Protected files and frozen public contract
+# Files you edit
 
-Students may manually edit only:
+Edit only these three files:
 
-- `src/ap_week03_planning/domain.py`
-- `src/ap_week03_planning/history.py`
-- `tests/test_student_evidence.py`
-- `artifacts/engineering_note.md`
+- `src/ap_week03_planning/domain.py`: TODO 1–7.
+- `src/ap_week03_planning/history.py`: TODO 8.
+- `tests/test_student_evidence.py`: your independent tests.
 
-Do not edit:
+Keep the public class names, field names, method names, signatures, decorators,
+error type and TODO numbers. You may add private helpers named with a leading
+underscore. The numerical functions and `PlanningRun._results` field are provided.
 
-- `src/ap_week03_planning/__init__.py`
-- `src/ap_week03_planning/geometry.py`
-- `src/ap_week03_planning/demo.py`
-- `src/ap_week03_planning/visualize.py`
-- every file under `scripts/`
-- `tests/test_published_contract.py`
-- `pyproject.toml`, `requirements.txt`, and `environment.yml`
-- every file under `docs/`
-- `README.md`, `.gitignore`, and this protected-file list
+`Configuration`, `ConfigurationBounds`, `Path`, `PlanningProblem` and
+`PlanResult` are frozen value objects. `PlanningRun` owns mutable result history.
+Invalid construction or updates raise `PlanningModelError`. Do not clip,
+reshape, pad, truncate or silently repair invalid data.
 
-Protected commands create or replace these required generated outputs. Commit
-them, but do not hand-edit them:
-
-- `artifacts/planning_objects_report.json`
-- `artifacts/planning_objects_preview.svg`
-- one `dist/ap_week03_planning-*.whl`
-
-The wheel build may also create ignored `build/` and `src/*.egg-info/`
-directories. These are build by-products, not additional editable source.
-
-Within `domain.py` and `history.py`, keep the public class names, field names,
-method names, public error type, documented meanings, and TODO numbering. You
-may add private helpers whose names begin with `_`.
-
-`Configuration`, `ConfigurationBounds`, `Path`, `PlanningProblem`, and
-`PlanResult` are frozen value objects. `PlanningRun` is the one mutable state
-owner. Invalid public construction or update must raise `PlanningModelError`.
-Do not silently clip, reshape, pad, truncate, or repair invalid data.
-
-`geometry.py` is the supplied pure numerical boundary. The demo and SVG caller
-show the object data that your package created; they do not implement a motion
-planner, collision checker, controller, or physics simulation.
-
+All other supplied files are protected, including public tests, scripts,
+installation files, documentation and the provided modules. The Assignment
+submits code and tests. The chapter's visualization tools are retained for
+Reading Section 6 and are not part of the Assignment workflow.

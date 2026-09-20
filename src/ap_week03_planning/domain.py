@@ -1,4 +1,4 @@
-"""Planning-domain value objects completed in Assignment 3, Part A."""
+"""Planning-domain value objects completed in the Week 3 Assignment."""
 
 from __future__ import annotations
 

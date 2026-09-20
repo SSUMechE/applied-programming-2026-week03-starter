@@ -37,7 +37,7 @@ def main() -> int:
         )
         return 1
     print(f"[PASS] Intentional baseline confirmed: {failed} failed, {passed} passed.")
-    print("[INFO] Record the summary and first FAILED node ID in the engineering note.")
+    print("[INFO] The failures come from unfinished TODOs. Continue with TODO 1.")
     return 0
 
 
